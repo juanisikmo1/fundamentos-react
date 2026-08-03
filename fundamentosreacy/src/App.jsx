@@ -1,31 +1,48 @@
-import { useState } from 'react'
-import foto from './assets/millos.png'
-import Titulo from "./components/header"
-import Dbasicos from "./components/perfil"
-import Cursos from "./components/cursos"
-import Footer from "./components/footer"
-import './App.css'
+import { useState } from "react";
+
+import Header from "./components/Header";
+import FormularioDatos from "./components/FormularioDatos";
+import FormularioAcademico from "./components/FormularioAcademico";
+import FormularioExperiencia from "./components/FormularioExperiencia";
+import Footer from "./components/Footer";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [paso, setPaso] = useState(1);
 
   return (
-    <>
-      <Titulo />
+    <div className="contenedor">
 
-      <div className="contenedor">
-        <div className="perfil">
-          <Dbasicos />
-        </div>
+      <div className="contenido">
 
-        <div className="cursos">
-          <Cursos />
-        </div>
+        <Header />
+
+        {paso === 1 && (
+          <FormularioDatos
+            siguiente={() => setPaso(2)}
+          />
+        )}
+        {paso === 2 && (
+          <FormularioAcademico
+            anterior={()=> setPaso(1)}
+            siguiente={() => setPaso(3)}
+          />
+        )}
+        {paso === 3 && (
+          <FormularioExperiencia
+            anterior={()=> setPaso(2)}
+            siguiente={() => setPaso(3)}
+          />
+        )}
+
+        <Footer />
+
       </div>
 
-      <Footer />
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

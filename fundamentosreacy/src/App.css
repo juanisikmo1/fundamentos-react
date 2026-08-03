@@ -1,149 +1,158 @@
 .contenedor {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 30px;
+  width: min(100% - 32px, 960px);
+  margin: 40px auto;
 }
 
-.cursos {
-  flex: 2;
-}
-
-.perfil {
-  flex: 3;
-}
-
-header {
-  background: linear-gradient(135deg, #e7e8e9, #7bacd4);
-  color: white;
+.encabezado,
+footer {
+  padding: 28px;
+  color: #fff;
   text-align: center;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  background: linear-gradient(135deg, #d40404, #611204);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-header h1 {
-  font-size: 2rem;
-  letter-spacing: 2px;
-}
-
-body {
+.encabezado h1 {
   margin: 0;
-  padding: 0;
-  background-color: #eaf4fc;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
 }
 
-.App {
+.encabezado p,
+footer p {
+  margin: 8px 0 0;
+}
+
+main {
+  margin: 28px 0;
+}
+
+.formulario {
+  padding: clamp(24px, 5vw, 42px);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.formulario h2 {
+  margin: 0 0 28px;
+  color: #00154e;
+  text-align: center;
+}
+
+.formulario form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grupo {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
-.foto {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid #95bce4;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 7px;
 }
 
-h1 {
-  color: #0d47a1;
-  margin-bottom: 8px;
+.grupo-completo,
+.formulario button,
+.mensaje-exito {
+  grid-column: 1 / -1;
 }
 
-h2 {
-  color: #1976d2;
-  margin: 20px 0 10px;
+.grupo label,
+legend {
+  font-weight: 700;
+  color: #1d3b29;
 }
 
-h3 {
-  color: #777;
-  margin-bottom: 15px;
-}
-
-p {
-  font-size: 17px;
-  line-height: 1.7;
-  text-align: justify;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style: none;
-  margin-top: 15px;
-}
-
-ul li {
-  background: #e3f2fd;
-  margin: 10px 0;
-  padding: 12px;
+input,
+select {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: #1f2933;
+  background: #fff;
+  border: 1px solid #b7c8bc;
   border-radius: 8px;
-  transition: .3s;
+  box-sizing: border-box;
 }
 
-ul li:hover {
-  background: #bbdefb;
-  transform: translateX(5px);
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #ad3786;
+  box-shadow: 0 0 0 3px rgba(173, 55, 134, 0.25);
 }
 
-section {
-  margin: 20px 0;
+input[type="file"] {
+  padding: 8px;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #b7c8bc;
+  border-radius: 8px;
+}
+
+.opciones-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.opciones-radio label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.opciones-radio input {
+  width: auto;
+  margin: 0;
 }
 
 button {
-  background-color: #0d6efd;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 8px;
+  padding: 13px 20px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
+  background: #971b12;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #084298;
+  background: #8d1e0f;
 }
 
-hr {
-  border: none;
-  height: 2px;
-  background: #1976d2;
-  margin: 25px 0;
-}
-
-footer {
-  margin-top: 40px;
-  background: #0d47a1;
-  color: white;
+.mensaje-exito {
+  padding: 12px;
+  margin-top: 4px;
+  color: #07395b;
+  font-weight: 700;
   text-align: center;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  background: #e6f6e9;
+  border-radius: 8px;
 }
 
-footer h3 {
-  color: white;
-  margin-bottom: 15px;
-}
+@media (max-width: 640px) {
+  .contenedor {
+    width: min(100% - 20px, 960px);
+    margin: 16px auto;
+  }
 
-footer p {
-  color: #eeeeee;
-  text-align: center;
-  margin: 8px;
-  font-size: 16px;
-}
+  .formulario form {
+    grid-template-columns: 1fr;
+  }
 
-footer a {
-  color: #90caf9;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
+  .grupo-completo,
+  .formulario button,
+  .mensaje-exito {
+    grid-column: auto;
+  }
 }

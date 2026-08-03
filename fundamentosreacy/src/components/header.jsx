@@ -1,11 +1,11 @@
-function Titulo()
+function Header()
 {
     return(
     <header>
-        <h1>HOJA DE VIDA APRENDIZ</h1>
+        <h1>Sistema de Registro Hojas de vida</h1>
     </header>
 
 )
 }   
 
-export default Titulo
+export default Header
