@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-function FormularioAcademico({ siguiente, anterior }) {
+function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
+  const actualizar = (campo, valor) => {
+    setDatos((anterior) => ({ ...anterior, [campo]: valor }));
+  };
 
   const continuar = (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ function FormularioAcademico({ siguiente, anterior }) {
 
         <div className="grupo">
           <label>Nivel de Formación</label>
-          <select>
+          <select value={datos.nivel || "Técnico"} onChange={(e) => actualizar("nivel", e.target.value)}>
             <option>Técnico</option>
             <option>Tecnólogo</option>
             <option>Profesional</option>
@@ -32,6 +35,7 @@ function FormularioAcademico({ siguiente, anterior }) {
           <input
             type="text"
             placeholder="Ingrese el título"
+            value={datos.titulo || ""} onChange={(e) => actualizar("titulo", e.target.value)}
           />
         </div>
 
@@ -40,6 +44,7 @@ function FormularioAcademico({ siguiente, anterior }) {
           <input
             type="text"
             placeholder="Ingrese los cursos"
+            value={datos.cursos || ""} onChange={(e) => actualizar("cursos", e.target.value)}
           />
         </div>
 
@@ -48,6 +53,7 @@ function FormularioAcademico({ siguiente, anterior }) {
           <input
             type="text"
             placeholder="Ingrese la institución"
+            value={datos.institucion || ""} onChange={(e) => actualizar("institucion", e.target.value)}
           />
         </div>
 
@@ -56,6 +62,7 @@ function FormularioAcademico({ siguiente, anterior }) {
           <input
             type="number"
             placeholder="Ejemplo: 2026"
+            value={datos.graduacion || ""} onChange={(e) => actualizar("graduacion", e.target.value)}
           />
         </div>
 

@@ -1,15 +1,9 @@
 import { useState } from 'react'
 
 function FormularioDatos({ siguiente }) {
-//Estados del formulario
-  const [foto, setFoto] = useState(null);
-  const [nombre, setNombre] = useState('');
-  const [edad, setEdad] = useState('');
-  const [ciudad, setCiudad] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [programa, setPrograma] = useState('');
-  const [ficha, setFicha] = useState('');
-  const [jornada, setJornada] = useState('Mañana');
+  const actualizar = (campo, valor) => {
+    setDatos((anterior) => ({ ...anterior, [campo]: valor }));
+  };
   
 //Funcion del boton continuar
   const continuar = (e) => {
@@ -39,8 +33,7 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="text"
                     placeholder="Ingrese su nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    value={datos.nombre || ""} onChange={(e) => actualizar("nombre", e.target.value)} required
                 />
             </div>
 
@@ -49,8 +42,7 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="number"
                     placeholder="Ingrese su edad"
-                    value={edad}
-                    onChange={(e) => setEdad(e.target.value)}
+                    value={datos.edad || ""} onChange={(e) => actualizar("edad", e.target.value)} required
                 />
             </div>
 
@@ -59,8 +51,7 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="text"
                     placeholder="Ingrese su ciudad"
-                    value={ciudad}
-                    onChange={(e) => setCiudad(e.target.value)}
+                    value={datos.ciudad || ""} onChange={(e) => actualizar("ciudad", e.target.value)} required
                 />
             </div>
 
@@ -69,8 +60,7 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="text"
                     placeholder="Ejemplo: ADSO"
-                    value={programa}
-                    onChange={(e) => setPrograma(e.target.value)}
+                    value={datos.programa || ""} onChange={(e) => actualizar("programa", e.target.value)} required
                 />
             </div>
 
@@ -79,8 +69,7 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="email"
                     placeholder="correo@misena.edu.co"
-                    value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
+                    value={datos.correo || ""} onChange={(e) => actualizar("correo", e.target.value)} required
                 />
             </div>
 
@@ -89,16 +78,14 @@ function FormularioDatos({ siguiente }) {
                 <input
                     type="number"
                     placeholder="Ingrese la ficha"
-                    value={ficha}
-                    onChange={(e) => setFicha(e.target.value)}
+                    value={datos.ficha || ""} onChange={(e) => actualizar("ficha", e.target.value)} required
                 />
             </div>
 
             <div className="grupo">
                 <label>Jornada</label>
 
-                <select value={jornada}
-                    onChange={(e) => setJornada(e.target.value)}>
+                <select value={datos.jornada || "Mañana"} onChange={(e) => actualizar("jornada", e.target.value)}>
                     <option>Mañana</option>
                     <option>Tarde</option>
                     <option>Noche</option>

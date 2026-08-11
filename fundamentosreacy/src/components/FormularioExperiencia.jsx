@@ -1,12 +1,9 @@
 import { useState } from "react";
 
 function FormularioExperiencia({ siguiente, anterior }) {
-
-    const [empresa, setEmpresa] = useState("");
-    const [cargo, setCargo] = useState("");
-    const [tiempo, setTiempo] = useState("");
-    const [funciones, setFunciones] = useState("");
-    const [habilidades, setHabilidades] = useState("");
+    const actualizar = (campo, valor) => {
+        setDatos((anterior) => ({ ...anterior, [campo]: valor }));
+    };
 
     const continuar = (e) => {
 
@@ -34,8 +31,7 @@ function FormularioExperiencia({ siguiente, anterior }) {
                     <input
                         type="text"
                         placeholder="Nombre de la empresa"
-                        value={empresa}
-                        onChange={(e) => setEmpresa(e.target.value)}
+                        alue={datos.empresa || ""} onChange={(e) => actualizar("empresa", e.target.value)}
                     />
                 </div>
 
@@ -45,8 +41,7 @@ function FormularioExperiencia({ siguiente, anterior }) {
                     <input
                         type="text"
                         placeholder="Cargo desempeñado"
-                        value={cargo}
-                        onChange={(e) => setCargo(e.target.value)}
+                        value={datos.cargo || ""} onChange={(e) => actualizar("cargo", e.target.value)}
                     />
                 </div>
 
@@ -56,8 +51,7 @@ function FormularioExperiencia({ siguiente, anterior }) {
                     <input
                         type="text"
                         placeholder="Ej: 2 años"
-                        value={tiempo}
-                        onChange={(e) => setTiempo(e.target.value)}
+                        value={datos.experiencia || ""} onChange={(e) => actualizar("experiencia", e.target.value)}
                     />
                 </div>
 
@@ -67,8 +61,7 @@ function FormularioExperiencia({ siguiente, anterior }) {
                     <textarea
                         rows="5"
                         placeholder="Describa las funciones realizadas"
-                        value={funciones}
-                        onChange={(e) => setFunciones(e.target.value)}
+                        value={datos.funciones || ""} onChange={(e) => actualizar("funciones", e.target.value)}
                     ></textarea>
                 </div>
 
@@ -78,8 +71,7 @@ function FormularioExperiencia({ siguiente, anterior }) {
                     <textarea
                         rows="5"
                         placeholder="Ejemplo: Java, React, MySQL..."
-                        value={habilidades}
-                        onChange={(e) => setHabilidades(e.target.value)}
+                        value={datos.habilidades || ""} onChange={(e) => actualizar("habilidades", e.target.value)}
                     ></textarea>
                 </div>
 
