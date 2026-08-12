@@ -17,7 +17,14 @@ function FormularioDatos({ datos, setDatos, siguiente }) {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => actualizar("foto", e.target.files?.[0]?.name || "")}
+            onChange={(e) => {
+              const archivo = e.target.files?.[0];
+
+              if (archivo) {
+                const imagenURL = URL.createObjectURL(archivo);
+                actualizar("foto", imagenURL);
+              }
+            }}
           />
         </div>
         <div className="grupo">

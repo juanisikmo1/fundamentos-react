@@ -15,10 +15,17 @@ function VistaPrevia({
 
       <h2>Vista Previa de la Hoja de Vida</h2>
 
-      {/* Datos personales */}
       <div className="preview-seccion">
         <h3>Datos personales</h3>
 
+        {datos.foto && (
+          <div className="foto-preview">
+            <img
+              src={datos.foto}
+              alt="Fotografía del aprendiz"
+            />
+          </div>
+        )}
         {campo("Nombre", datos.nombre)}
         {campo("Edad", datos.edad)}
         {campo("Ciudad", datos.ciudad)}
@@ -28,26 +35,52 @@ function VistaPrevia({
         {campo("Jornada", datos.jornada)}
       </div>
 
-      {/* Información académica */}
       <div className="preview-seccion">
         <h3>Información académica</h3>
 
         {campo("Nivel", academico.nivel)}
         {campo("Título", academico.titulo)}
-        {campo("Cursos", academico.cursos)}
         {campo("Institución", academico.institucion)}
         {campo("Año de graduación", academico.graduacion)}
-      </div>
 
-      {/* Experiencia laboral */}
+        <p>
+          <strong>Cursos realizados:</strong>
+        </p>
+
+        <div className="cursos-preview">
+          {(academico.cursos || []).map((curso, indice) => (
+            <div className="curso-preview" key={indice}>
+              {curso}
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="preview-seccion">
         <h3>Experiencia laboral</h3>
 
-        {campo("Empresa", experiencia.empresa)}
-        {campo("Cargo", experiencia.cargo)}
-        {campo("Tiempo de experiencia", experiencia.experiencia)}
-        {campo("Funciones", experiencia.funciones)}
-        {campo("Habilidades", experiencia.habilidades)}
+        {experiencia.length === 0 ? (
+    <p>No hay experiencias registradas.</p>
+  ) : (
+    experiencia.map((exp, indice) => (
+
+        <div
+          className="experiencia-preview"
+          key={indice}
+        >
+
+          <h4>
+            Experiencia {indice + 1}
+          </h4>
+
+          {campo("Empresa", exp.empresa)}
+          {campo("Cargo", exp.cargo)}
+          {campo("Tiempo de experiencia", exp.tiempo)}
+          {campo("Funciones", exp.funciones)}
+          {campo("Habilidades", exp.habilidades)}
+
+        </div>
+        ))
+      )}
       </div>
 
       <button

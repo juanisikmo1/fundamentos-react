@@ -1,3 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #1f2933;
+}
+
 .contenedor {
   width: min(100% - 32px, 960px);
   margin: 40px auto;
@@ -29,6 +40,7 @@ main {
 
 .formulario {
   padding: clamp(24px, 5vw, 42px);
+  margin: 28px 0;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
@@ -65,7 +77,8 @@ legend {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 11px 12px;
   font: inherit;
@@ -76,8 +89,14 @@ select {
   box-sizing: border-box;
 }
 
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: none;
   border-color: #ad3786;
   box-shadow: 0 0 0 3px rgba(173, 55, 134, 0.25);
@@ -85,6 +104,31 @@ select:focus {
 
 input[type="file"] {
   padding: 8px;
+}
+
+button {
+  padding: 13px 20px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: #971b12;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #8d1e0f;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.formulario form > button {
+  margin-top: 5px;
 }
 
 fieldset {
@@ -114,22 +158,6 @@ fieldset {
   margin: 0;
 }
 
-button {
-  padding: 13px 20px;
-  font: inherit;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  background: #971b12;
-  border: none;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background: #8d1e0f;
-}
-
 .mensaje-exito {
   padding: 12px;
   margin-top: 4px;
@@ -140,10 +168,258 @@ button:hover {
   border-radius: 8px;
 }
 
-@media (max-width: 640px) {
+.cursos {
+  grid-column: 1 / -1;
+}
+
+.cursos > label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #1d3b29;
+  text-align: center;
+}
+
+.agregar-curso {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.agregar-curso input {
+  flex: 1;
+}
+
+.agregar-curso button {
+  width: auto;
+  padding: 10px 16px;
+  margin: 0;
+  background: #971b12;
+}
+
+.agregar-curso button:hover {
+  background: #971b12;
+}
+
+.lista-cursos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.curso-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 12px;
+
+  background: #f0f0f5;
+  border-radius: 8px;
+
+  color: #6b7280;
+}
+
+.curso-item span {
+  flex: 1;
+  word-break: break-word;
+}
+
+.curso-item button {
+  flex-shrink: 0;
+
+  padding: 6px 14px;
+
+  background: #e52525;
+  border-radius: 7px;
+
+  font-size: 0.85rem;
+}
+
+.curso-item button:hover {
+  background: #c91c1c;
+}
+
+.lista-experiencias {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+}
+
+.lista-experiencias h3 {
+  margin: 0 0 12px;
+  color: #00154e;
+  text-align: center;
+}
+
+.experiencia-item {
+  padding: 18px;
+  margin-bottom: 12px;
+
+  background: #f0f0f5;
+  border-radius: 10px;
+
+  border-left: 5px solid #971b12;
+}
+
+.experiencia-item h4 {
+  margin: 0 0 10px;
+  color: #00154e;
+  font-size: 1.05rem;
+}
+
+.experiencia-item p {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.experiencia-item button {
+  margin-top: 10px;
+  padding: 7px 14px;
+  background: #e52525;
+  font-size: 0.85rem;
+}
+
+.experiencia-item button:hover {
+  background: #c91c1c;
+}
+
+.botones {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 10px;
+}
+
+.botones button {
+  width: auto;
+}
+
+.vista-previa {
+  padding: clamp(24px, 5vw, 42px);
+}
+
+
+/* Título */
+
+.vista-previa h2 {
+  margin-bottom: 30px;
+}
+
+
+/* Secciones */
+
+.preview-seccion {
+  padding: 20px;
+  margin-bottom: 20px;
+
+  background: #f8f9fb;
+
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+}
+
+.preview-seccion h3 {
+  padding-bottom: 10px;
+  margin: 0 0 15px;
+
+  color: #00154e;
+
+  border-bottom: 2px solid #971b12;
+}
+
+
+/* Información */
+
+.preview-seccion p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.preview-seccion strong {
+  color: #1d3b29;
+}
+
+.foto-preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.foto-preview img {
+  width: 130px;
+  height: 130px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+  border: 4px solid #971b12;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.experiencia-preview {
+  padding: 16px;
+  margin-bottom: 14px;
+
+  background: #fff;
+
+  border: 1px solid #dfe3e8;
+  border-left: 5px solid #971b12;
+
+  border-radius: 8px;
+}
+
+.experiencia-preview:last-child {
+  margin-bottom: 0;
+}
+
+.experiencia-preview h4 {
+  margin: 0 0 12px;
+  color: #00154e;
+  font-size: 1.05rem;
+}
+
+.experiencia-preview p {
+  margin: 6px 0;
+}
+
+.cursos-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.curso-preview {
+  padding: 9px 12px;
+
+  background: #f0f0f5;
+
+  border-radius: 7px;
+
+  color: #555;
+}
+
+.curso-preview::before {
+  content: "✓ ";
+}
+
+@media (max-width: 768px) {
+
   .contenedor {
-    width: min(100% - 20px, 960px);
-    margin: 16px auto;
+    width: min(100% - 24px, 960px);
+    margin: 25px auto;
+  }
+
+  .formulario {
+    padding: 25px;
   }
 
   .formulario form {
@@ -152,7 +428,96 @@ button:hover {
 
   .grupo-completo,
   .formulario button,
+  .mensaje-exito,
+  .cursos,
+  .lista-experiencias,
+  .botones {
+    grid-column: auto;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .contenedor {
+    width: min(100% - 20px, 960px);
+    margin: 16px auto;
+  }
+
+  .encabezado,
+  footer {
+    padding: 22px 16px;
+    border-radius: 12px;
+  }
+
+  .formulario {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .formulario form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .grupo-completo,
+  .formulario button,
   .mensaje-exito {
     grid-column: auto;
   }
+
+  .agregar-curso {
+    flex-direction: row;
+  }
+
+  .agregar-curso button {
+    white-space: nowrap;
+  }
+
+  .curso-item {
+    padding: 9px;
+  }
+
+  .experiencia-item {
+    padding: 14px;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+
+  .botones button {
+    width: 100%;
+  }
+
+  .preview-seccion {
+    padding: 15px;
+  }
+
+  .foto-preview img {
+    width: 110px;
+    height: 110px;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .agregar-curso {
+    flex-direction: column;
+  }
+
+  .agregar-curso input,
+  .agregar-curso button {
+    width: 100%;
+  }
+
+  .curso-item {
+    align-items: flex-start;
+  }
+
+  .curso-item button {
+    padding: 6px 10px;
+  }
+
 }
