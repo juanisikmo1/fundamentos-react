@@ -521,3 +521,24 @@ fieldset {
   }
 
 }
+.error {
+  color: #d40404;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.grupo small {
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+.grupo:has(.error) input,
+.grupo:has(.error) select {
+  border-color: #d40404;
+}
+
+.grupo:has(.error) input:focus,
+.grupo:has(.error) select:focus {
+  border-color: #d40404;
+  box-shadow: 0 0 0 3px rgba(212, 4, 4, 0.15);
+}

@@ -1,25 +1,43 @@
 import { useState } from "react";
 
-function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
+function FormularioAcademico({
+  datos,
+  setDatos,
+  siguiente,
+  anterior
+}) {
 
   const [nuevoCurso, setNuevoCurso] = useState("");
+  const [errores, setErrores] = useState({});
 
   const actualizar = (campo, valor) => {
+
     setDatos((anterior) => ({
       ...anterior,
       [campo]: valor
     }));
+
+    if (errores[campo]) {
+      setErrores((anterior) => ({
+        ...anterior,
+        [campo]: ""
+      }));
+    }
   };
 
   const agregarCurso = () => {
+
     if (!nuevoCurso.trim()) {
-      alert("Ingrese el nombre del curso");
+      alert("Debe escribir el nombre del curso.");
       return;
     }
 
     setDatos((anterior) => ({
       ...anterior,
-      cursos: [...(anterior.cursos || []), nuevoCurso.trim()]
+      cursos: [
+        ...(anterior.cursos || []),
+        nuevoCurso.trim()
+      ]
     }));
 
     setNuevoCurso("");
@@ -28,16 +46,47 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
   const eliminarCurso = (indice) => {
     setDatos((anterior) => ({
       ...anterior,
-      cursos: anterior.cursos.filter((_, i) => i !== indice)
+      cursos: anterior.cursos.filter(
+        (_, i) => i !== indice
+      )
     }));
   };
+
+
+  const validar = () => {
+
+    const nuevosErrores = {};
+
+    if (!datos.titulo || !datos.titulo.trim()) {
+      nuevosErrores.titulo =
+        "Debe ingresar el título obtenido.";
+    }
+
+    if (!datos.institucion || !datos.institucion.trim()) {
+      nuevosErrores.institucion =
+        "Debe ingresar la institución educativa.";
+    }
+
+    if (!datos.graduacion) {
+      nuevosErrores.graduacion =
+        "Debe ingresar el año de graduación.";
+    }
+
+    if (!datos.cursos || datos.cursos.length === 0) {
+      nuevosErrores.cursos =
+        "Debe agregar al menos un curso.";
+    }
+
+    setErrores(nuevosErrores);
+
+    return Object.keys(nuevosErrores).length === 0;
+  };
+
 
   const continuar = (e) => {
     e.preventDefault();
 
-    alert("Información académica guardada");
-
-    if (siguiente) {
+    if (validar()) {
       siguiente();
     }
   };
@@ -50,14 +99,19 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
       <form onSubmit={continuar}>
 
         <div className="grupo">
+
           <label>Nivel de Formación</label>
 
           <select
-            value={datos.nivel || "Técnico"}
+            value={datos.nivel || ""}
             onChange={(e) =>
               actualizar("nivel", e.target.value)
             }
           >
+            <option value="">
+              Seleccione un nivel
+            </option>
+
             <option>Técnico</option>
             <option>Tecnólogo</option>
             <option>Profesional</option>
@@ -75,6 +129,11 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
               actualizar("titulo", e.target.value)
             }
           />
+          {errores.titulo && (
+            <span className="error">
+              {errores.titulo}
+            </span>
+          )}
         </div>
 
         <div className="grupo cursos">
@@ -103,31 +162,39 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
 
           <div className="lista-cursos">
 
-            {(datos.cursos || []).map((curso, indice) => (
+            {(datos.cursos || []).map(
+              (curso, indice) => (
 
-              <div
-                className="curso-item"
-                key={indice}
-              >
-
-                <span>
-                  ✓ {curso}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    eliminarCurso(indice)
-                  }
+                <div
+                  className="curso-item"
+                  key={indice}
                 >
-                  Eliminar
-                </button>
 
-              </div>
+                  <span>
+                    ✓ {curso}
+                  </span>
 
-            ))}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      eliminarCurso(indice)
+                    }
+                  >
+                    Eliminar
+                  </button>
+
+                </div>
+
+              )
+            )}
 
           </div>
+
+          {errores.cursos && (
+            <span className="error">
+              {errores.cursos}
+            </span>
+          )}
 
         </div>
 
@@ -139,9 +206,19 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
             placeholder="Ingrese la institución"
             value={datos.institucion || ""}
             onChange={(e) =>
-              actualizar("institucion", e.target.value)
+              actualizar(
+                "institucion",
+                e.target.value
+              )
             }
           />
+
+          {errores.institucion && (
+            <span className="error">
+              {errores.institucion}
+            </span>
+          )}
+
         </div>
 
         <div className="grupo">
@@ -149,13 +226,26 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
 
           <input
             type="number"
+            min="1950"
+            max="2026"
             placeholder="Ejemplo: 2026"
             value={datos.graduacion || ""}
             onChange={(e) =>
-              actualizar("graduacion", e.target.value)
+              actualizar(
+                "graduacion",
+                e.target.value
+              )
             }
           />
+
+          {errores.graduacion && (
+            <span className="error">
+              {errores.graduacion}
+            </span>
+          )}
+
         </div>
+
 
         <button
           type="button"
@@ -163,6 +253,7 @@ function FormularioAcademico({ datos, setDatos, siguiente, anterior }) {
         >
           Anterior
         </button>
+
 
         <button type="submit">
           Siguiente
